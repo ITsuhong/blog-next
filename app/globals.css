@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #4d8ff7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,4 +19,49 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes x1 {
+  from {
+    transform: translateY(100px) translateX(-100px);
+  }
+  to {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes x2 {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100px);
+  }
+}
+
+@keyframes x3 {
+  from {
+    transform: translateY(100px) translateX(100px) scale(1);
+  }
+  to {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes x5 {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.7);
+  }
+}
+
+@keyframes x6 {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.8);
+  }
 }
