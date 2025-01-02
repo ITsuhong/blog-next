@@ -7,14 +7,15 @@ import {authRoutes} from "@/routes";
 const {auth} = NextAuth(authConfig)
 export default auth((req) => {
     const {nextUrl} = req;
-    const isLoggedIn = !!req.auth;
+    const isLoggedIn = !!req.auth?.user;
     const isAuthRoute = nextUrl.pathname.startsWith(authRoutes);
+    console.log(req.auth,'登录')
     if (isAuthRoute) {
         if (isLoggedIn) {
             return NextResponse.next();
         }
-
-        return Response.redirect(new URL(`/login`, nextUrl));
+        return NextResponse.next();
+        // return Response.redirect(new URL(`/login`, nextUrl));
 
     } else {
         return NextResponse.next();
