@@ -1,4 +1,5 @@
 import Sidebar from "@/components/backstage/Sidebar";
+import TopNavigation from "@/components/backstage/TopNavigation";
 
 export default function RootLayout({
                                        children,
@@ -10,8 +11,12 @@ export default function RootLayout({
         <>
             <div className="flex bg-[#f5f5f5]">
                 <Sidebar></Sidebar>
+                <div className="flex-1">
+                    <TopNavigation/>
+                    {children}
+                </div>
 
-                {children}
+
             </div>
 
         </>
