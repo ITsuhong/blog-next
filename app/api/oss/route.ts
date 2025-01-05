@@ -4,10 +4,7 @@ import {STS} from 'ali-oss';
 const config = {
     // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
 
-    // 填写Bucket名称。
-    bucket: 'img-saas-su',
-    // 当您需要设置上传到OSS文件的前缀时，请配置此项，否则置空即可。
-    dir: ''
+
 };
 
 async function getToken() {
