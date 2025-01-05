@@ -1,13 +1,9 @@
 // "use server"
-// 用户登录名称 TestOss@1476556516593056.onaliyun.com
-// AccessKey ID LTAI5tEsZqoTUHLTRGunky1a
-// AccessKey Secret xTh0y9hWUhfo5nKD0g6I8Udecm7gG0
 import {STS} from 'ali-oss';
 
 const config = {
     // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
-    accessKeyId: 'LTAI5tEsZqoTUHLTRGunky1a',
-    accessKeySecret: 'xTh0y9hWUhfo5nKD0g6I8Udecm7gG0',
+
     // 填写Bucket名称。
     bucket: 'img-saas-su',
     // 当您需要设置上传到OSS文件的前缀时，请配置此项，否则置空即可。
