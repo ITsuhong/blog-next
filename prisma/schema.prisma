@@ -69,3 +69,29 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationToken")
 }
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  desc      String
+  bg_img    String
+  posts     Blog[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tag")
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @default("")
+  html      String   @default("")
+  tagId     String
+  tag       Tag      @relation(fields: [tagId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tagId])
+  @@map("blog")
+}

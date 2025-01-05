@@ -10,16 +10,17 @@ export default auth((req) => {
     const isLoggedIn = !!req.auth?.user;
     const isAuthRoute = nextUrl.pathname.startsWith(authRoutes);
     console.log(req.auth,'登录')
-    if (isAuthRoute) {
-        if (isLoggedIn) {
-            return NextResponse.next();
-        }
-        return NextResponse.next();
-        // return Response.redirect(new URL(`/login`, nextUrl));
-
-    } else {
-        return NextResponse.next();
-    }
+    return NextResponse.next();
+    // if (isAuthRoute) {
+    //     if (isLoggedIn) {
+    //         return NextResponse.next();
+    //     }
+    //     return NextResponse.next();
+    //     // return Response.redirect(new URL(`/login`, nextUrl));
+    //
+    // } else {
+    //     return NextResponse.next();
+    // }
 })
 
 export const config = {

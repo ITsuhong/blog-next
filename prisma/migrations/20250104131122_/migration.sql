@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `blog` MODIFY `content` VARCHAR(191) NOT NULL DEFAULT '',
+    MODIFY `html` VARCHAR(191) NOT NULL DEFAULT '';

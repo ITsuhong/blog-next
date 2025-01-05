@@ -4,24 +4,27 @@
 import {Airplay, Cookie} from "lucide-react";
 import {useState} from "react";
 import {cn} from "@/lib/utils";
+import {useRouter} from "next/navigation"
 
 export const SIDEBAR_LIST = [
     {
         name: "分类",
         icon: Airplay,
-        path: "/category"
+        path: "/backstage/category"
     },
     {
         name: "写博客",
         icon: Cookie,
-        path: "/write"
+        path: "/backstage/write"
     }
 ];
 
 const Sidebar = () => {
-    const [activePath, setActivePath] = useState("/category");
+    const [activePath, setActivePath] = useState("/backstage/category");
+    const router = useRouter();
     const handleChangePath = (path: string) => {
         setActivePath(path)
+        router.push(path)
     }
     return (
         <div className="h-screen w-20 bg-white md:w-48 py-10">
@@ -36,7 +39,7 @@ const Sidebar = () => {
                                 })
                             }
                             key={item.name}
-                            onClick={() => setActivePath(item.path)}
+                            onClick={() => handleChangePath(item.path)}
                         >
                             {
                                 activePath === item.path &&
