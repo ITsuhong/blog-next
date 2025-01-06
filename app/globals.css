@@ -36,6 +36,12 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+.public .md-editor-dark div.mk-cute-theme{
+    background-image: none !important;
+}
+.public .md-editor div.mk-cute-theme{
+    background-image: none !important;
+}
 
 @keyframes x1 {
     from {
