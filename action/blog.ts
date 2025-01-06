@@ -86,7 +86,7 @@ export async function saveBlog(values: UpdateBlogFormSchemaType) {
         const validatedFields = UpdateBlogFormSchema.safeParse(values);
         if (validatedFields.success) {
             const {id, content, html} = validatedFields.data;
-            console.log('保存', id, content, html)
+            // console.log('保存', id, content, html)
             const result = await prismadb.blog.update({
                 where: {
                     id: id
@@ -107,11 +107,12 @@ export async function saveBlog(values: UpdateBlogFormSchemaType) {
                 error: validatedFields.error,
             };
         }
-    } catch {
+    } catch(e) {
+        // console.error(e, '一百'); // 使用 console.error 代替 console.log
         return {
             success: false,
-            error: '保存失败'
-        }
+            error: e  ,
+        };
     }
 }
 

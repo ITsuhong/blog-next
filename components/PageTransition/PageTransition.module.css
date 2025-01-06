@@ -1,0 +1,17 @@
+/* components/PageTransition.module.css */
+.pageContainer {
+    height: 100%;
+
+    /*transform: translateY(200%);*/
+}
+.animating {
+    animation: slideInFromBottom 1s ease-in-out forwards;
+}
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(80px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

@@ -12,7 +12,7 @@ export default function RootLayout({
             <div className="bg-[#f5f5f5] h-screen flex flex-col">
                 {/*<Sidebar></Sidebar>*/}
                 <TopNavigation/>
-                <div className="h-full flex-1">
+                <div className="flex-1">
                     {children}
                 </div>
 

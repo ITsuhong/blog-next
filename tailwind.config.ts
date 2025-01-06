@@ -14,11 +14,14 @@ export default {
                 'sans': ['fangyuan', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
             },
             colors: {
-                background: 'hsl(var(--background))',
+                background: 'var(--background)',
                 foreground: 'hsl(var(--foreground))',
+
                 primary: {
                     DEFAULT: 'hsl(var(--primary))',
-                    foreground: 'hsl(var(--primary-foreground))'
+                    foreground: 'hsl(var(--primary-foreground))',
+                    second: 'var(--primary-second)',
+                    hover:"#7db1f8"
                 },
                 secondary: {
                     DEFAULT: 'hsl(var(--secondary))',
@@ -47,7 +50,7 @@ export default {
                     foreground: 'hsl(var(--destructive-foreground))'
                 },
                 border: 'hsl(var(--border))',
-                input: 'hsl(var(--input))',
+                input: 'var(--input)',
                 ring: 'hsl(var(--ring))',
                 chart: {
                     '1': 'hsl(var(--chart-1))',
