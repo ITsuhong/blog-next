@@ -45,7 +45,7 @@ export default function TopNavigation() {
 
     return (
         <div className="flex justify-between">
-            <div className="p-2 rounded-xl bg-input w-2/6 flex justify-between cursor-pointer"
+            <div className="p-2 rounded-xl bg-input w-2/5 flex justify-between cursor-pointer"
                  onClick={() => setOpen(true)}>
                 <div>
                     <span className="text-xs font-bold text-primary-second mr-3">Search</span>

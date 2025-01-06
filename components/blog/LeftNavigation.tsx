@@ -20,10 +20,10 @@ export default async function LeftNavigation() {
     console.log(list)
     return (
         <div className="w-[300px] ">
-            <div className="font-mono font-[900] text-2xl mb-5">
-                @ROCK.SUHONG
-            </div>
-            <div className="border-b-2">
+            <Link href="/public" className="font-mono font-[900] text-2xl  cursor-pointer hover:text-primary-hover">
+                @BLOG.SUHONG
+            </Link>
+            <div className="border-b-2 border-b-border mt-8">
                 <div className="font-bold text-primary-second mb-4">BLOG</div>
                 {
                     list.map((tag, index) => {

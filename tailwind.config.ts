@@ -15,13 +15,16 @@ export default {
             },
             colors: {
                 background: 'var(--background)',
+                music: {
+                    background: 'var(--music-background)',
+                },
                 foreground: 'hsl(var(--foreground))',
 
                 primary: {
                     DEFAULT: 'hsl(var(--primary))',
                     foreground: 'hsl(var(--primary-foreground))',
                     second: 'var(--primary-second)',
-                    hover:"#7db1f8"
+                    hover: "#7db1f8"
                 },
                 secondary: {
                     DEFAULT: 'hsl(var(--secondary))',
@@ -49,7 +52,7 @@ export default {
                     DEFAULT: 'hsl(var(--destructive))',
                     foreground: 'hsl(var(--destructive-foreground))'
                 },
-                border: 'hsl(var(--border))',
+                border: 'var(--border)',
                 input: 'var(--input)',
                 ring: 'hsl(var(--ring))',
                 chart: {

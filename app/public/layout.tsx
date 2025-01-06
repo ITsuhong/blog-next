@@ -6,6 +6,7 @@ import Image from "next/image";
 import LeftNavigation from "@/components/blog/LeftNavigation";
 import TopNavigation from "@/components/blog/TopNavigation";
 import PageTransition from "@/components/PageTransition/index";
+import Music from "@/components/music";
 
 export default function RootLayout({
                                        children,
@@ -14,8 +15,11 @@ export default function RootLayout({
 }>) {
 
     return (
-        <div className="public flex items-center justify-center">
-            <div className="w-[88%] h-full bg-background rounded-2xl opacity-[0.98] p-5 font-mono flex">
+        <div className="public flex items-center justify-center relative">
+            <div className="absolute bottom-20 left-0 z-10">
+                <Music></Music>
+            </div>
+            <div className="w-[80%] h-full bg-background rounded-2xl opacity-[0.98] p-5 font-mono flex">
                 <LeftNavigation/>
                 <div className="flex-1 flex flex-col">
                     <TopNavigation></TopNavigation>

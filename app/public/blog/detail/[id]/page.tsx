@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {MdPreview} from "md-editor-rt";
 import 'md-editor-rt/lib/style.css';
 import {useTheme} from 'next-themes'
+import {tag} from "postcss-selector-parser";
 
 export default function Page() {
     const [blogDetail, setBlogDetail] = useState<IBlog>()
@@ -24,16 +25,20 @@ export default function Page() {
         }
     }, []);
     return (
-        blogDetail?.id && <MdPreview className="write" style={{
-            height: "100%",
-            width: "100%",
-            border: 'none',
-            backgroundColor: "transparent",
-        }}
-                                     modelValue={text}
-                                     theme={theme ? theme as any : 'dark'}
-                                     previewTheme="mk-cute"
-                                     codeTheme={'atom'}
-        />
+        blogDetail?.id && <>
+            <div className="text-primary font-bold text-2xl">{blogDetail.tag.name + blogDetail?.title}</div>
+            <MdPreview className="write" style={{
+                height: "100%",
+                width: "100%",
+                border: 'none',
+                backgroundColor: "transparent",
+                paddingBottom:"40px"
+            }}
+                       modelValue={text}
+                       theme={theme ? theme as any : 'dark'}
+                       previewTheme="mk-cute"
+                       codeTheme={'atom'}
+            />
+        </>
     )
 }

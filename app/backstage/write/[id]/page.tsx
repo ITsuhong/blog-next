@@ -79,7 +79,7 @@ export default function Page() {
                           onUploadImg={onUploadImg} modelValue={text}
                           onChange={handleOptionChange}
                           onSave={onSave}
-                          previewTheme="cyanosis"
+                          previewTheme="mk-cute"
                 />
             </div>
         </div>

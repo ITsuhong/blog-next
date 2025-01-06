@@ -27,7 +27,8 @@ body {
 .public {
     background-blend-mode: color-dodge;
     background-color: rgba(18, 21, 39, 0.86);
-    background-image: url("https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/bg.jpg");
+    /*background-image: url("https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/bg.jpg");*/
+    background-image: url("https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/xin.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -36,11 +37,20 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-.public .md-editor-dark div.mk-cute-theme{
+
+.public .md-editor-dark div.mk-cute-theme {
     background-image: none !important;
 }
-.public .md-editor div.mk-cute-theme{
+
+.public .md-editor div.mk-cute-theme {
     background-image: none !important;
+}
+
+.public .mk-cute-theme {
+    color: var(--primary-text);
+    font-family: fangyuan, serif;
+    font-weight: 800;
+    font-size: 18px;
 }
 
 @keyframes x1 {
@@ -91,6 +101,7 @@ body {
 @layer base {
     :root {
         --background: #e0e5ec;
+        --music-background: #fefefe;
         --foreground: 240 10% 3.9%;
         --card: 0 0% 100%;
         --card-foreground: 240 10% 3.9%;
@@ -98,6 +109,7 @@ body {
         --popover-foreground: 240 10% 3.9%;
         --primary: 240 5.9% 10%;
         --primary-second: #16171a;
+        --primary-text: black;
         --primary-foreground: 0 0% 98%;
         --secondary: 240 4.8% 95.9%;
         --secondary-foreground: 240 5.9% 10%;
@@ -107,7 +119,7 @@ body {
         --accent-foreground: 240 5.9% 10%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 240 5.9% 90%;
+        --border: #fafafa;
         --input: #fefefe;
         --ring: 240 10% 3.9%;
         --chart-1: 12 76% 61%;
@@ -119,13 +131,16 @@ body {
     }
 
     .dark {
+
         --background: #16171a;
+        --music-background: #0a090b;
         --foreground: 0 0% 98%;
         --card: 240 10% 3.9%;
         --card-foreground: 0 0% 98%;
         --popover: 240 10% 3.9%;
         --popover-foreground: 0 0% 98%;
         --primary: 0 0% 98%;
+        --primary-text: white;
         --primary-second: #c7c7c7;
         --primary-foreground: 240 5.9% 10%;
         --secondary: 240 3.7% 15.9%;
@@ -136,7 +151,7 @@ body {
         --accent-foreground: 0 0% 98%;
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 0 0% 98%;
-        --border: 240 3.7% 15.9%;
+        --border: #303133;
         --input: #000;
         --ring: 240 4.9% 83.9%;
         --chart-1: 220 70% 50%;
@@ -210,4 +225,8 @@ svg.md-editor-icon {
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+}
+
+.heart-container:hover .hover-circle {
+    opacity: 1;
 }
