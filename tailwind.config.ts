@@ -9,6 +9,22 @@ export default {
     ],
     theme: {
         extend: {
+            keyframes: {
+                next: {
+                    '0%': {transform: 'scale(1)'},
+                    '100%': {transform: 'scale(1.2)', opacity: '0'},
+                },
+                back: {
+                    '0%': {transform: 'scale(1)'},
+                    '100%': {transform: 'scale(0.2)', opacity: '0'},
+                }
+            },
+            filter: {
+                'custom-drop-shadow': 'drop-shadow(0 11px 6px rgba(172, 184, 204, .45))',
+            },
+            boxShadow: {
+                'light': '0 0 15px #c7c7c7 inset,0 2px 13px #c7c7c7'
+            },
             fontFamily: {
                 'fangyuan': ['fangyuan',],
                 'sans': ['fangyuan', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]

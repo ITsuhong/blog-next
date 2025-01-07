@@ -15,7 +15,6 @@ export default function Page() {
     useEffect(() => {
         if (id) {
             getBlogsByTagId(id).then(res => {
-                console.log(res, 'll')
                 setBlogList(res)
             })
             getTagById(id).then(res => {
@@ -43,7 +42,6 @@ export default function Page() {
                                     <div className="w-1 h-1 rounded-full bg-[#ced5e0]"></div>
                                     <div
                                         className="ml-3 text-xl underline-offset-2 underline hover:no-underline hover:text-primary-hover">{item.title}
-                                        quick
                                     </div>
                                 </Link>
                             )

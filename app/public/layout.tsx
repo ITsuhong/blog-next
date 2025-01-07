@@ -16,7 +16,7 @@ export default function RootLayout({
 
     return (
         <div className="public flex items-center justify-center relative">
-            <div className="absolute bottom-20 left-0 z-10">
+            <div className="absolute bottom-20 left-32 z-10">
                 <Music></Music>
             </div>
             <div className="w-[80%] h-full bg-background rounded-2xl opacity-[0.98] p-5 font-mono flex">
