@@ -3,6 +3,7 @@
 import {ArrowLeftToLine, ArrowRightToLine, ExternalLink, Heart, Play} from "lucide-react"
 import {useState, useCallback, useRef, useEffect} from "react"
 import {cn} from "@/lib/utils"
+import {diff} from "@codemirror/legacy-modes/mode/diff";
 
 interface MusicPlayerProps {
     className?: string
@@ -22,12 +23,12 @@ export default function Music({className}: MusicPlayerProps) {
     const [source, setSource] = useState<AudioBufferSourceNode | null>(null)
     const [isPlaying, setIsPlaying] = useState(false)
     const [progress, setProgress] = useState(0)
-    const [duration, setDuration] = useState(0)
-    const progressRef = useRef<HTMLDivElement>(null)
+
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null)
     const [currentTime, setCurrentTime] = useState(0)
     const startTimeRef = useRef<number>(0)
-    const animationFrameRef = useRef<number>()
+    const animationFrameRef = useRef<number>(0)
+    const diffTime = useRef(0)
 
     const changeNext = useCallback(() => {
         setIsNext(true)
@@ -54,110 +55,81 @@ export default function Music({className}: MusicPlayerProps) {
         }
     }, [audioContext])
 
-    const updateProgress = useCallback(() => {
-        if (source && audioContext && duration && isPlaying) {
-            const currentPlayTime = currentTime + (audioContext.currentTime - startTimeRef.current)
 
-            if (currentPlayTime >= duration) {
-                setIsPlaying(false)
-                setSource(null)
-                setProgress(100)
-                setCurrentTime(duration)
-                if (animationFrameRef.current) {
-                    cancelAnimationFrame(animationFrameRef.current)
-                }
-                return
-            }
+    const handleProgressClick = (index: number) => {
 
-            setCurrentTime(currentPlayTime)
-            setProgress((currentPlayTime / duration) * 100)
-            animationFrameRef.current = requestAnimationFrame(updateProgress)
+        if (audioContext) {
+            const duration = audioBuffer?.duration || 0
+            const tem = duration * index / 100
+            console.log(tem, duration, 'index')
+
+            source?.stop()
+            playMusic(tem)
+            setCurrentTime(tem)
         }
-    }, [source, audioContext, duration, isPlaying, currentTime])
+    }
+    const getCurrentTime = () => {
 
-    useEffect(() => {
-        if (audioBuffer && !duration) {
-            setDuration(audioBuffer.duration)
-        }
-    }, [audioBuffer, duration])
+        // console.log(, 's')
+        if (audioContext) {
+            const currentTime = audioContext?.destination.context.currentTime || 0
 
-    const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (!progressRef.current || !audioBuffer) return
 
-        const rect = progressRef.current.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const percentage = (x / rect.width) * 100
-        const newTime = (percentage / 100) * audioBuffer.duration
-
-        if (source) {
-            source.stop()
-            setSource(null)
+            console.log(diffTime.current)
+            setCurrentTime(currentTime - diffTime.current)
+            // startTimeRef.current = 0
         }
 
-        setCurrentTime(newTime)
-        setProgress(percentage)
 
-        if (isPlaying) {
-            const newSource = audioContext.createBufferSource()
-            newSource.buffer = audioBuffer
-            newSource.connect(audioContext.destination)
+        animationFrameRef.current = requestAnimationFrame(getCurrentTime)
+    }
 
-            startTimeRef.current = audioContext.currentTime
-            newSource.start(0, newTime)
-
-            setSource(newSource)
-            animationFrameRef.current = requestAnimationFrame(updateProgress)
-        }
-    }, [source, audioContext, audioBuffer, isPlaying, updateProgress])
-
-    const playMusic = useCallback(async () => {
+    const playMusic = async (duration ?: number) => {
         try {
-            if (source) {
-                source.stop()
-                setSource(null)
-                setIsPlaying(false)
-                if (animationFrameRef.current) {
-                    cancelAnimationFrame(animationFrameRef.current)
-                }
-                return
-            }
-
             let buffer = audioBuffer
             if (!buffer) {
                 buffer = await loadAudio()
                 if (!buffer) return
             }
-
-            if (!duration) {
-                setDuration(buffer.duration)
-            }
-
             const newSource = audioContext.createBufferSource()
             newSource.buffer = buffer
             newSource.connect(audioContext.destination)
+            console.log(currentTime, 'cu')
+            newSource.start(0, duration ? duration : currentTime)
 
-            startTimeRef.current = audioContext.currentTime
-            newSource.start(0, currentTime)
+            if (startTimeRef.current) {
+                console.log(audioContext.currentTime, startTimeRef.current)
+                diffTime.current = audioContext.currentTime - startTimeRef.current
+            }
 
             setSource(newSource)
             setIsPlaying(true)
-            animationFrameRef.current = requestAnimationFrame(updateProgress)
+            getCurrentTime()
+
         } catch (error) {
             console.error('Error playing audio:', error)
         }
-    }, [audioContext, loadAudio, source, updateProgress, audioBuffer, currentTime, duration])
+    }
 
-    useEffect(() => {
-        return () => {
-            if (animationFrameRef.current) {
+    const stopMusic = () => {
+
+        console.log(audioContext?.currentTime)
+        window.cancelAnimationFrame(animationFrameRef.current)
+        console.log(audioContext.destination.context.currentTime)
+        if (source) {
+            source.stop()
+            // setSource(null)
+            setIsPlaying(false)
+            source.onended = () => {
+                console.log("停止了", audioContext.currentTime)
+                startTimeRef.current = currentTime
                 cancelAnimationFrame(animationFrameRef.current)
             }
-            if (source) {
-                source.stop()
-            }
+            // if (animationFrameRef.current) {
+            //     cancelAnimationFrame(animationFrameRef.current)
+            // }
         }
-    }, [source])
-
+    }
     return (
         <div className={cn("w-80 bg-music-background rounded-2xl p-6 relative", className)}>
             <div className="flex justify-end">
@@ -193,12 +165,13 @@ export default function Music({className}: MusicPlayerProps) {
                         </div>
                     </div>
                     <div
-                        onClick={() => playMusic()}
+
                         style={{filter: 'drop-shadow(0 11px 6px rgba(172, 184, 204, .45))'}}
                         className="mt-3 cursor-pointer w-16 h-16 border-8 border-[white] shadow-light rounded-full flex justify-center items-center">
                         {
-                            isPlaying ? <span className="w-[22px] h-[22px] rounded-md bg-white"></span> :
-                                <Play fill="white" strokeWidth={3} size={28} color="white"/>
+                            isPlaying ? <span onClick={() => stopMusic()}
+                                              className="w-[22px] h-[22px] rounded-md bg-white"></span> :
+                                <Play onClick={() => playMusic()} fill="white" strokeWidth={3} size={28} color="white"/>
                         }
                     </div>
                 </div>
@@ -231,11 +204,11 @@ export default function Music({className}: MusicPlayerProps) {
                     <div className="font-black text-xl opacity-70">06:24</div>
                 </div>
                 <div className="mt-3 opacity-70 relative rounded-md overflow-hidden cursor-pointer"
-                     ref={progressRef}
-                     onClick={handleProgressClick}>
+                >
                     <div className="flex items-center">
                         {Array(100).fill(0).map((_, index) => (
                             <div key={index}
+                                 onClick={() => handleProgressClick(index)}
                                  className="w-[1%] h-[6px] bg-[#d0d8e6]">
                             </div>
                         ))}
@@ -245,6 +218,7 @@ export default function Music({className}: MusicPlayerProps) {
                     </div>
                 </div>
                 <div className="font-black mt-3 opacity-70">
+
                     {formatTime(currentTime)}
                 </div>
 
