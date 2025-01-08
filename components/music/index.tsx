@@ -3,106 +3,156 @@
 import {ArrowLeftToLine, ArrowRightToLine, ExternalLink, Heart, Play} from "lucide-react"
 import {useState, useCallback, useRef, useEffect} from "react"
 import {cn} from "@/lib/utils"
-import {diff} from "@codemirror/legacy-modes/mode/diff";
+
 
 interface MusicPlayerProps {
     className?: string
 }
 
-const imgList = [
-    'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
-    'https://rick-chou.github.io/one-piece-react/assets/cover3-0ac6e6ac.jpg',
-    'https://rick-chou.github.io/one-piece-react/assets/cover1-1e022e34.jpg'
+
+const musicList = [
+    {
+        img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
+        singer: "热狗",
+        name: "轻熟女",
+        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/qingshunv.mp3"
+    },
+    {
+        img: 'https://rick-chou.github.io/one-piece-react/assets/cover3-0ac6e6ac.jpg',
+        singer: "周杰伦",
+        name: "一路向北",
+        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/zjl.mp3"
+    },
+    {
+        img: 'https://rick-chou.github.io/one-piece-react/assets/cover1-1e022e34.jpg',
+        singer: "梁博",
+        name: "曾经是情侣",
+        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/cjsql.mp3"
+    }
 ]
 
 export default function Music({className}: MusicPlayerProps) {
-    const [current, setCurrent] = useState(0)
+    const current = useRef(0)
     const [before, setBefore] = useState(-1)
     const [isNext, setIsNext] = useState(true)
     const [audioContext] = useState(() => new (window.AudioContext || (window as any).webkitAudioContext)())
-    const [source, setSource] = useState<AudioBufferSourceNode | null>(null)
+    const source = useRef<AudioBufferSourceNode | null>(null)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [progress, setProgress] = useState(0)
 
-    const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null)
+
+    const audioBuffer = useRef<AudioBuffer | null>(null)
     const [currentTime, setCurrentTime] = useState(0)
+    const currentTimeRef = useRef(0)
     const startTimeRef = useRef<number>(0)
     const animationFrameRef = useRef<number>(0)
     const diffTime = useRef(0)
+    const timerRef = useRef<any>(null)
+    const [allTime, setAllTime] = useState(0)
+    const [progress, setProgress] = useState(0)
+    const reset = () => {
+        stopMusic()
+        source.current = null
 
-    const changeNext = useCallback(() => {
+        clearCurrentTime()
+        setCurrentTime(() => 0)
+        audioBuffer.current = null;
+
+        setProgress(0)
+    }
+    const changeNext = async () => {
+
         setIsNext(true)
-        setBefore(current)
-        setCurrent((prev) => (prev + 1) % imgList.length)
-    }, [current])
+        setBefore(current.current)
+        current.current = (current.current + 1) % musicList.length
 
-    const changeBack = useCallback(() => {
+
+        reset()
+        await loadAudio()
+        playMusic(0)
+
+    }
+
+
+    const changeBack = async () => {
         setIsNext(false)
-        setBefore(current)
-        setCurrent((prev) => (prev - 1 + imgList.length) % imgList.length)
-    }, [current])
+        setBefore(current.current)
+        current.current = (current.current - 1 + musicList.length) % musicList.length
+        reset()
+        await loadAudio()
+        playMusic(0)
+    }
 
-    const loadAudio = useCallback(async () => {
+    const loadAudio = async () => {
         try {
-            const response = await fetch('https://img-saas-su.oss-cn-beijing.aliyuncs.com/zjl.mp3')
+            const response = await fetch(musicList[current.current].url)
             const arrayBuffer = await response.arrayBuffer()
             const buffer = await audioContext.decodeAudioData(arrayBuffer)
-            setAudioBuffer(buffer)
+            audioBuffer.current = buffer
+
             return buffer
         } catch (error) {
             console.error('Error loading audio:', error)
             return null
         }
-    }, [audioContext])
+    }
 
 
-    const handleProgressClick = (index: number) => {
+    const handleProgressClick = async (index: number) => {
 
         if (audioContext) {
-            const duration = audioBuffer?.duration || 0
+            const bufferTem = audioBuffer.current
+            if (!bufferTem) {
+                audioBuffer.current = await loadAudio()
+            }
+            const duration = bufferTem?.duration || 0
             const tem = duration * index / 100
-            console.log(tem, duration, 'index')
-
-            source?.stop()
-            playMusic(tem)
+            source.current?.stop()
+            clearCurrentTime()
             setCurrentTime(tem)
+            await playMusic(tem)
+            console.log(tem / allTime)
         }
     }
     const getCurrentTime = () => {
+        timerRef.current = setInterval(() => {
+            if (currentTimeRef.current >= allTime) {
+                clearCurrentTime()
+                changeNext()
+            }
+            setCurrentTime(current => {
 
-        // console.log(, 's')
-        if (audioContext) {
-            const currentTime = audioContext?.destination.context.currentTime || 0
-
-
-            console.log(diffTime.current)
-            setCurrentTime(currentTime - diffTime.current)
-            // startTimeRef.current = 0
-        }
-
-
-        animationFrameRef.current = requestAnimationFrame(getCurrentTime)
+                return current + 0.01
+            })
+            // console.log(currentTime, 'shjian')
+        }, 10)
+        // animationFrameRef.current = requestAnimationFrame(getCurrentTime)
     }
-
+    const clearCurrentTime = () => {
+        if (timerRef.current) {
+            clearInterval(timerRef.current)
+        }
+    }
     const playMusic = async (duration ?: number) => {
+        console.log("null", currentTime, current, audioBuffer)
         try {
-            let buffer = audioBuffer
+            let buffer = audioBuffer.current
             if (!buffer) {
+
                 buffer = await loadAudio()
                 if (!buffer) return
             }
+            setAllTime(buffer?.duration || 0)
             const newSource = audioContext.createBufferSource()
             newSource.buffer = buffer
             newSource.connect(audioContext.destination)
-            console.log(currentTime, 'cu')
-            newSource.start(0, duration ? duration : currentTime)
+            newSource.start(0, duration != undefined ? duration : currentTime)
 
             if (startTimeRef.current) {
                 console.log(audioContext.currentTime, startTimeRef.current)
                 diffTime.current = audioContext.currentTime - startTimeRef.current
             }
+            source.current = newSource
 
-            setSource(newSource)
             setIsPlaying(true)
             getCurrentTime()
 
@@ -113,25 +163,33 @@ export default function Music({className}: MusicPlayerProps) {
 
     const stopMusic = () => {
 
-        console.log(audioContext?.currentTime)
-        window.cancelAnimationFrame(animationFrameRef.current)
-        console.log(audioContext.destination.context.currentTime)
+        console.log(source)
         if (source) {
-            source.stop()
+
+            source.current?.stop()
             // setSource(null)
             setIsPlaying(false)
-            source.onended = () => {
-                console.log("停止了", audioContext.currentTime)
-                startTimeRef.current = currentTime
-                cancelAnimationFrame(animationFrameRef.current)
-            }
-            // if (animationFrameRef.current) {
-            //     cancelAnimationFrame(animationFrameRef.current)
+            clearCurrentTime()
+            // source.current?.onended = () => {
+            //     clearCurrentTime()
             // }
         }
     }
+    const initMucic = useCallback(async () => {
+        const buffer = await loadAudio()
+        setAllTime(buffer?.duration || 0)
+    }, [])
+    useEffect(() => {
+        initMucic()
+        console.log("执行")
+    }, [])
+    useEffect(() => {
+        currentTimeRef.current = currentTime
+        // console.log(currentTime / allTime * 100)
+        setProgress(() => currentTime / allTime * 100)
+    }, [allTime, currentTime])
     return (
-        <div className={cn("w-80 bg-music-background rounded-2xl p-6 relative", className)}>
+        <div className={cn("w-80 bg-music-background bg-opacity-70 rounded-2xl p-6 relative", className)}>
             <div className="flex justify-end">
                 <div className="flex flex-col items-center justify-center ">
                     <div className="relative z-10">
@@ -180,28 +238,28 @@ export default function Music({className}: MusicPlayerProps) {
 
             </div>
             {
-                imgList.map((item, index) => {
+                musicList.map((item, index) => {
                     return (
                         <div className={
                             cn('absolute top-6 -left-10 scale-0 transition-transform duration-300 ease-in-out', {
-                                'scale-100 opacity-1': current == index,
+                                'scale-100 opacity-1': current.current == index,
                                 'animate-[next_1s_ease-in-out]': before == index && isNext,
                                 'animate-[back_1s_ease-in-out]': before == index && !isNext,
 
                             })
                         } key={index}>
-                            <img src={item} className="w-[250px] h-[250px] rounded-xl blur-xl absolute  top-0"/>
-                            <img src={item} className="w-[250px] h-[250px] rounded-xl relative z-10"/>
+                            <img src={item.img} className="w-[250px] h-[250px] rounded-xl blur-xl absolute  top-0"/>
+                            <img src={item.img} className="w-[250px] h-[250px] rounded-xl relative z-10"/>
                         </div>
                     )
                 })
             }
 
             <div className="-mt-12 text-[#71829e]">
-                <div className=" font-black  text-2xl">告五人</div>
-                <div className="font-black  text-xl mt-3 opacity-70">爱在夏天</div>
+                <div className=" font-black  text-2xl">{musicList[current.current].singer}</div>
+                <div className="font-black  text-xl mt-3 opacity-70">{musicList[current.current].name}</div>
                 <div className="flex justify-end">
-                    <div className="font-black text-xl opacity-70">06:24</div>
+                    <div className="font-black text-xl opacity-70">{formatTime(allTime)}</div>
                 </div>
                 <div className="mt-3 opacity-70 relative rounded-md overflow-hidden cursor-pointer"
                 >
@@ -213,8 +271,14 @@ export default function Music({className}: MusicPlayerProps) {
                             </div>
                         ))}
                     </div>
-                    <div className={cn('absolute h-[6px] bg-[#a3b3ce] left-0 top-0 rounded-md')}
-                         style={{width: `${progress}%`}}>
+                    <div className={cn('absolute flex items-center  left-0 h-0 top-[3px] rounded-md w-full')}
+                    >
+                        {Array(100).fill(0).map((_, index) => (
+                            progress > index && <div key={index}
+                                                     onClick={() => handleProgressClick(index)}
+                                                     className="w-[1%] h-[6px] bg-[#a3b3ce]">
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="font-black mt-3 opacity-70">
