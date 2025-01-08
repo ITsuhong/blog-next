@@ -1,5 +1,3 @@
-// "use client"
-
 import {ThemeProviders} from "@/components/providers";
 import {Toaster} from "react-hot-toast";
 import Image from "next/image";
@@ -9,11 +7,13 @@ import PageTransition from "@/components/PageTransition/index";
 import Music from "@/components/music";
 import MusicContain from "@/components/MusicContain";
 
+
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+  
 
     return (
         <div className="public flex items-center justify-center relative">
