@@ -13,6 +13,12 @@ interface MusicPlayerProps {
 const musicList = [
     {
         img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
+        singer: "PG one",
+        name: "以父之名",
+        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/yfzm.flac"
+    },
+    {
+        img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
         singer: "热狗",
         name: "轻熟女",
         url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/qingshunv.mp3"

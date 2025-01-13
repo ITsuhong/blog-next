@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'img-saas-su.oss-cn-beijing.aliyuncs.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'rick-chou.github.io',
+            },
         ]
     }
     /* config options here */
