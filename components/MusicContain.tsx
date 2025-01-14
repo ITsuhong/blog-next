@@ -1,10 +1,13 @@
 'use client'
 
-import Music from "@/components/music";
+// import Music from "@/components/music";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Music2 } from "lucide-react";
-
+import dynamic from "next/dynamic";
+const BrowserOnlyComponent = dynamic(() => import('@/components/music'), {
+    ssr: false,
+});
 export default function MusicContain() {
     const [isExpanded, setIsExpanded] = useState(true);
 
@@ -41,7 +44,7 @@ export default function MusicContain() {
                                   border-y border-r border-white/10 shadow-lg"
                     >
                         <div className="p-4">
-                            <Music />
+                            <BrowserOnlyComponent />
                         </div>
                     </div>
 

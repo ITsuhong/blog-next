@@ -10,34 +10,35 @@ interface MusicPlayerProps {
 }
 
 
-const musicList = [
-    {
-        img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
-        singer: "PG one",
-        name: "以父之名",
-        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/yfzm.flac"
-    },
-    {
-        img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
-        singer: "热狗",
-        name: "轻熟女",
-        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/qingshunv.mp3"
-    },
-    {
-        img: 'https://rick-chou.github.io/one-piece-react/assets/cover3-0ac6e6ac.jpg',
-        singer: "周杰伦",
-        name: "一路向北",
-        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/zjl.mp3"
-    },
-    {
-        img: 'https://rick-chou.github.io/one-piece-react/assets/cover1-1e022e34.jpg',
-        singer: "梁博",
-        name: "曾经是情侣",
-        url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/cjsql.mp3"
-    }
-]
+
 
 export default function Music({className}: MusicPlayerProps) {
+    const musicList = [
+        {
+            img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
+            singer: "PG one",
+            name: "以父之名",
+            url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/yfzm.flac"
+        },
+        {
+            img: 'https://rick-chou.github.io/one-piece-react/assets/cover2-78da3449.jpg',
+            singer: "热狗",
+            name: "轻熟女",
+            url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/qingshunv.mp3"
+        },
+        {
+            img: 'https://rick-chou.github.io/one-piece-react/assets/cover3-0ac6e6ac.jpg',
+            singer: "周杰伦",
+            name: "一路向北",
+            url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/zjl.mp3"
+        },
+        {
+            img: 'https://rick-chou.github.io/one-piece-react/assets/cover1-1e022e34.jpg',
+            singer: "梁博",
+            name: "曾经是情侣",
+            url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/cjsql.mp3"
+        }
+    ]
     const current = useRef(0)
     const [before, setBefore] = useState(-1)
     const [isNext, setIsNext] = useState(true)
