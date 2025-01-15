@@ -36,11 +36,11 @@ resources:
       environmentVariables:
         PATH: >-
           /opt/nodejs20/bin:/usr/local/bin/apache-maven/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/ruby/bin
-        DATABASE_URL: ${env('DATABASE_URL')}
-        OSS_SERETID: ${env('OSS_SERETID')}
-        OSS_SECRETEY: ${env('OSS_SECRETEY')}
-        NEXT_PUBLIC_OSS_URL: ${env('NEXT_PUBLIC_OSS_URL')}
-        AUTH_TRUST_HOST: ${env('AUTH_TRUST_HOST')}
+        DATABASE_URL: mysql://root:r*we9omBG34j@123.56.104.248:3306/blog_next
+        OSS_SERETID: AKIDJXnoa7RWO0QbXEnND8AFTeifUAdv4A5u
+        OSS_SECRETEY: lMwVryqW4QddGhu9KL8lFcolTxCSaVIx
+        NEXT_PUBLIC_OSS_URL: https://img-saas-su.oss-cn-beijing.aliyuncs.com
+        AUTH_TRUST_HOST: true
       customRuntimeConfig:
         command:
           - node
