@@ -9,6 +9,6 @@ export function getBaseUrl() {
   if (process.env.NODE_ENV !== 'production') {
     return 'http://localhost:3000';
   } else {
-    return process.env.NEXT_PUBLIC_PRODUCTION_URL!;
+    return 'http://123.56.104.248';
   }
 }

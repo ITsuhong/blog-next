@@ -7,6 +7,7 @@ import "./globals.css";
 import {ThemeProviders} from '@/components/providers';
 import localFont from 'next/font/local'
 import ProgressProvider from "@/components/ProgressProvider"
+import {Suspense} from "react";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -33,7 +34,11 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-        <ThemeProviders> <ProgressProvider>{children}</ProgressProvider></ThemeProviders>
+        <ThemeProviders> <ProgressProvider>
+            <Suspense>
+                {children}
+            </Suspense>
+        </ProgressProvider></ThemeProviders>
         <Toaster/>
         {/*{children}*/}
         </body>
