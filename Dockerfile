@@ -1,32 +1,26 @@
-# 1. 构建基础镜像
 FROM node AS base
 
-ENV NODE_ENV=production \
-  APP_PATH=/app
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
 
-WORKDIR $APP_PATH
+# Set the working directory
+WORKDIR /app
 
-# 使用国内镜像，加速下载安装（可选）
-RUN npm config set registry https://registry.npm.taobao.org
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# 复制 package.json 和 yarn.lock
-COPY package.json yarn.lock ./
+# Install dependencies
+RUN npm install --force
 
-# 安装项目依赖
-RUN yarn install
-
-# 复制应用代码
+# Copy the rest of the application code
 COPY . .
 
-# 复制 .env 文件
-COPY .env ./
-
-# 生成 Prisma Client
-RUN npx prisma generate
-
-# 构建项目
+# Build the Next.js application
 RUN npm run build
 
+# Expose the port that the app runs on
 EXPOSE 3000
 
+# Start the Next.js application
 CMD ["npm", "start"]
