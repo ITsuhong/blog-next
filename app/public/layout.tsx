@@ -20,9 +20,9 @@ export default function RootLayout({
             <MusicContain/>
             <div className="w-[80%] h-full bg-background rounded-2xl opacity-[0.98] p-5 font-mono flex">
                 <LeftNavigation/>
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex flex-col w-96">
                     <TopNavigation></TopNavigation>
-                    <div className="mt-6 flex-1 max-h-full overflow-hidden">
+                    <div className="mt-6 flex-1 max-h-full max-w-full overflow-hidden">
 
                         <PageTransition>
                             {children}

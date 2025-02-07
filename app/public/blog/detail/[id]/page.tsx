@@ -26,10 +26,10 @@ export default function Page() {
     }, []);
     return (
         blogDetail?.id && <>
-            <div className="text-primary font-bold text-2xl">{blogDetail.tag.name + blogDetail?.title}</div>
+            <div className="text-primary font-bold text-2xl pb-4">{blogDetail.tag.name+'：' + blogDetail?.title}</div>
             <MdPreview className="write" style={{
                 height: "100%",
-                width: "100%",
+                // width: "100%",
                 border: 'none',
                 backgroundColor: "transparent",
                 paddingBottom:"40px"
