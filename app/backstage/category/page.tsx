@@ -1,7 +1,7 @@
 import Card from "@/components/Card";
 import EditBlogDialog from "@/components/backstage/EditBlogDialog";
 import {getTags} from "@/action/tag"
-
+export const dynamic = 'force-dynamic'; // 禁用缓存
 export default async function Page() {
     const list = await getTags()
     console.log("list", list)
