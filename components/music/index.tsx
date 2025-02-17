@@ -15,25 +15,25 @@ interface MusicPlayerProps {
 export default function Music({className}: MusicPlayerProps) {
     const musicList = [
         {
-            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/1.jpg',
+            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/5.jpg',
             singer: "PG one",
             name: "以父之名",
             url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/yfzm.flac"
         },
         {
-            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/2.jpg',
+            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/9.jpg',
             singer: "热狗",
             name: "轻熟女",
             url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/qingshunv.mp3"
         },
         {
-            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/3.jpg',
+            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/8.jpg',
             singer: "周杰伦",
             name: "一路向北",
             url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/zjl.mp3"
         },
         {
-            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/4.jpg',
+            img: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/musicBg/7.jpg',
             singer: "梁博",
             name: "曾经是情侣",
             url: "https://img-saas-su.oss-cn-beijing.aliyuncs.com/music/cjsql.mp3"
