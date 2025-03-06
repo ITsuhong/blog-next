@@ -30,6 +30,13 @@ export default {
                 'sans': ['fangyuan', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
             },
             colors: {
+                white: '#ffffff',
+                black: '#000000',
+                theme: '#30A5FF',
+                warning: '#eeaf3a',
+                green: '#529b2e',
+                red: '#ea580c',
+                blue: '#4683ED',
                 background: 'var(--background)',
                 music: {
                     background: 'var(--music-background)',

@@ -8,6 +8,8 @@ import {ThemeProviders} from '@/components/providers';
 import localFont from 'next/font/local'
 import ProgressProvider from "@/components/ProgressProvider"
 import {Suspense} from "react";
+import DndWrapper from "@/components/DndWrapper";
+
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -34,11 +36,16 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+
         <ThemeProviders> <ProgressProvider>
             <Suspense>
-                {children}
+                <DndWrapper>
+                    {children}
+                </DndWrapper>
+
             </Suspense>
         </ProgressProvider></ThemeProviders>
+
         <Toaster/>
         {/*{children}*/}
         </body>

@@ -42,13 +42,22 @@ export default async function LeftNavigation() {
                         )
                     })
                 }
-                {/*<div className="flex">*/}
-                {/*    <div>*/}
-                {/*        <Image alt="" src={'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/5'} width={20}*/}
-                {/*               height={20}></Image>*/}
-                {/*    </div>*/}
+            </div>
+            <div className="border-b-2 border-b-border mt-8">
+                <div className="font-bold text-primary-second mb-4">React组件</div>
+                <Link href={'/public/todoList/'} className="flex mb-6 items-center cursor-pointer"
+                >
+                    <div>
+                        <Image className="rounded-md object-fill" alt=""
+                               src="https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/react.webp"
+                               width={30}
+                               height={30}></Image>
+                    </div>
+                    <div
+                        className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">TodoList
+                    </div>
 
-                {/*</div>*/}
+                </Link>
             </div>
         </div>
     )
