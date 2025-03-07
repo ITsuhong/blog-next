@@ -36,7 +36,7 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <ThemeProviders> <ProgressProvider>
             <Suspense>
                 <DndWrapper>

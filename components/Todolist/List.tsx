@@ -33,7 +33,7 @@ function Item(prop: ListItem) {
             } else {
                 addItem({
                     id: uuidv4(),
-                    content: "新的待办",
+                    content: "新的待办，双击编辑",
                     status: 'todo'
                 }, prop.id)
             }
@@ -102,7 +102,7 @@ const List = () => {
             addItem({
                 id: uuidv4(),
                 status: 'todo',
-                content: "新的待办"
+                content: "新的待办，双击编辑"
             })
         },
         collect(monitor) {

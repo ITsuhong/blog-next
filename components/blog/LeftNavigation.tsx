@@ -15,9 +15,16 @@ function getRandomLightColor() {
 
 export default async function LeftNavigation() {
     const list = await getTags()
-
-
-    console.log(list)
+    const componentsList = [
+        {
+            name: "拖拽TodoList",
+            path: '/public/todoList/'
+        },
+        {
+            name: "代码编辑PlayGround",
+            path: '/public/playground/'
+        }
+    ]
     return (
         <div className="w-[300px] ">
             <Link href="/public" className="font-mono font-[900] text-2xl  cursor-pointer hover:text-primary-hover">
@@ -45,19 +52,26 @@ export default async function LeftNavigation() {
             </div>
             <div className="border-b-2 border-b-border mt-8">
                 <div className="font-bold text-primary-second mb-4">React组件</div>
-                <Link href={'/public/todoList/'} className="flex mb-6 items-center cursor-pointer"
-                >
-                    <div>
-                        <Image className="rounded-md object-fill" alt=""
-                               src="https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/react.webp"
-                               width={30}
-                               height={30}></Image>
-                    </div>
-                    <div
-                        className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">TodoList
-                    </div>
+                {
+                    componentsList.map(item => {
+                        return <Link key={item.name} href={item.path}
+                                     className="flex mb-6 items-center cursor-pointer"
+                        >
+                            <div>
+                                <Image className="rounded-md object-fill" alt=""
+                                       src="https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/react.webp"
+                                       width={30}
+                                       height={30}></Image>
+                            </div>
+                            <div
+                                className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">{item.name}
+                            </div>
 
-                </Link>
+                        </Link>
+                    })
+                }
+
+
             </div>
         </div>
     )

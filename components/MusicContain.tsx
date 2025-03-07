@@ -9,7 +9,7 @@ const BrowserOnlyComponent = dynamic(() => import('@/components/music'), {
     ssr: false,
 });
 export default function MusicContain() {
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     return (
         <>
