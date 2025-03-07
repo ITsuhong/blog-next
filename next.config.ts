@@ -19,14 +19,14 @@ const nextConfig: NextConfig = {
     },
     typescript: {
         ignoreBuildErrors: true // 忽略 TypeScript 检查
-    },
-    webpack: config => {
-        config.module.rules.push({
-            test: /\.(tsx|css|json)$/,
-            use: 'raw-loader'
-        })
-        return config
     }
+    // webpack: config => {
+    //     config.module.rules.push({
+    //         test: /\.(tsx|css|json)$/,
+    //         use: 'raw-loader'
+    //     })
+    //     return config
+    // }
 
     /* config options here */
 }
