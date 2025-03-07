@@ -25,6 +25,11 @@ export default async function LeftNavigation() {
             name: '代码编辑PlayGround',
             path: '/public/playground/',
             image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
+        },
+        {
+            name: '高仿 ElementPlus',
+            path: '/public/element/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
         }
     ]
     return (
