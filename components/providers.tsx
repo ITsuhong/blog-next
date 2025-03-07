@@ -1,10 +1,11 @@
 'use client'
 
-import {ThemeProvider} from 'next-themes'
-import dynamic from 'next/dynamic'
+import { ThemeProvider } from 'next-themes'
 
-export function ThemeProviders({children}: Readonly<{
-    children: React.ReactNode;
+export function ThemeProviders({
+    children
+}: Readonly<{
+    children: React.ReactNode
 }>) {
     return (
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>

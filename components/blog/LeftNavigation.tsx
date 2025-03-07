@@ -1,28 +1,30 @@
-import {getTags} from "@/action/tag";
-import Image from "next/image";
-import Link from "next/link"
+import { getTags } from '@/action/tag'
+import Image from 'next/image'
+import Link from 'next/link'
 
 function getRandomLightColor() {
     // 生成范围在 192 到 255 之间的随机数
-    const getRandomChannelValue = () => Math.floor(Math.random() * (256 - 192) + 192);
+    const getRandomChannelValue = () => Math.floor(Math.random() * (256 - 192) + 192)
 
-    const r = getRandomChannelValue();
-    const g = getRandomChannelValue();
-    const b = getRandomChannelValue();
+    const r = getRandomChannelValue()
+    const g = getRandomChannelValue()
+    const b = getRandomChannelValue()
 
-    return `rgb(${r}, ${g}, ${b})`;
+    return `rgb(${r}, ${g}, ${b})`
 }
 
 export default async function LeftNavigation() {
     const list = await getTags()
     const componentsList = [
         {
-            name: "拖拽TodoList",
-            path: '/public/todoList/'
+            name: '拖拽TodoList',
+            path: '/public/todoList/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/react.webp'
         },
         {
-            name: "代码编辑PlayGround",
-            path: '/public/playground/'
+            name: '代码编辑PlayGround',
+            path: '/public/playground/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
         }
     ]
     return (
@@ -32,46 +34,29 @@ export default async function LeftNavigation() {
             </Link>
             <div className="border-b-2 border-b-border mt-8">
                 <div className="font-bold text-primary-second mb-4">BLOG</div>
-                {
-                    list.map((tag, index) => {
-                        return (
-                            <Link href={'/public/blog/' + tag.id} className="flex mb-6 items-center cursor-pointer"
-                                  key={tag.id}>
-                                <div className="p-[2px]  rounded-md" style={{backgroundColor: getRandomLightColor()}}>
-                                    <Image className="rounded-md object-fill" alt="" src={tag.bg_img}
-                                           width={40}
-                                           height={40}></Image>
-                                </div>
-                                <div
-                                    className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">{tag.name}</div>
-
-                            </Link>
-                        )
-                    })
-                }
+                {list.map((tag, index) => {
+                    return (
+                        <Link href={'/public/blog/' + tag.id} className="flex mb-6 items-center cursor-pointer" key={tag.id}>
+                            <div className="p-[2px]  rounded-md" style={{ backgroundColor: getRandomLightColor() }}>
+                                <Image className="rounded-md object-fill" alt="" src={tag.bg_img} width={40} height={40}></Image>
+                            </div>
+                            <div className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">{tag.name}</div>
+                        </Link>
+                    )
+                })}
             </div>
             <div className="border-b-2 border-b-border mt-8">
                 <div className="font-bold text-primary-second mb-4">React组件</div>
-                {
-                    componentsList.map(item => {
-                        return <Link key={item.name} href={item.path}
-                                     className="flex mb-6 items-center cursor-pointer"
-                        >
+                {componentsList.map(item => {
+                    return (
+                        <Link key={item.name} href={item.path} className="flex mb-6 items-center cursor-pointer">
                             <div>
-                                <Image className="rounded-md object-fill" alt=""
-                                       src="https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/mine/react.webp"
-                                       width={30}
-                                       height={30}></Image>
+                                <Image className="rounded-md object-fill" alt="" src={item.image} width={30} height={30}></Image>
                             </div>
-                            <div
-                                className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">{item.name}
-                            </div>
-
+                            <div className="max-w-full font-[900] u-line-1 ml-2 text-[18px] text-primary-second hover:text-primary-hover">{item.name}</div>
                         </Link>
-                    })
-                }
-
-
+                    )
+                })}
             </div>
         </div>
     )

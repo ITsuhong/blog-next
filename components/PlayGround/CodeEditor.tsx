@@ -1,7 +1,7 @@
 import MonacoEditor, { OnMount, EditorProps } from '@monaco-editor/react'
 import { createATA } from './ata'
 import { editor } from 'monaco-editor'
-
+import { useTheme } from 'next-themes'
 export interface EditorFile {
     name: string
     value: string
@@ -16,6 +16,8 @@ interface Props {
 
 export default function Editor(props: Props) {
     const { file, onChange, options } = props
+    const { theme } = useTheme()
+    console.log(theme, '主题')
 
     const handleEditorMount: OnMount = (editor, monaco) => {
         editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
@@ -48,7 +50,7 @@ export default function Editor(props: Props) {
             onMount={handleEditorMount}
             onChange={onChange}
             value={file.value}
-            theme="vs-dark"
+            theme={theme == 'dark' ? 'vs-dark' : 'light'}
             options={{
                 fontSize: 14,
                 scrollBeyondLastLine: false,
