@@ -14,7 +14,8 @@ function getRandomLightColor() {
 }
 
 export default async function LeftNavigation() {
-    const list = await getTags()
+    // const list = await getTags()
+    const list = []
     const componentsList = [
         {
             name: '拖拽TodoList',
@@ -24,6 +25,16 @@ export default async function LeftNavigation() {
         {
             name: '代码编辑PlayGround',
             path: '/public/playground/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
+        },
+        {
+            name: 'ReactFlow 画流程图',
+            path: '/public/flow/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
+        },
+        {
+            name: 'ReactFlow 振荡器调音',
+            path: '/public/audio/',
             image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
         },
         {

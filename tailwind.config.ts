@@ -1,33 +1,30 @@
-import type {Config} from "tailwindcss";
+import { Background } from '@xyflow/react'
+import type { Config } from 'tailwindcss'
 
 export default {
-    darkMode: ["class"],
-    content: [
-        "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-        "./components/**/*.{js,ts,jsx,tsx,mdx}",
-        "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
+    darkMode: ['class'],
+    content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
     theme: {
         extend: {
             keyframes: {
                 next: {
-                    '0%': {transform: 'scale(1)'},
-                    '100%': {transform: 'scale(1.2)', opacity: '0'},
+                    '0%': { transform: 'scale(1)' },
+                    '100%': { transform: 'scale(1.2)', opacity: '0' }
                 },
                 back: {
-                    '0%': {transform: 'scale(1)'},
-                    '100%': {transform: 'scale(0.2)', opacity: '0'},
+                    '0%': { transform: 'scale(1)' },
+                    '100%': { transform: 'scale(0.2)', opacity: '0' }
                 }
             },
             filter: {
-                'custom-drop-shadow': 'drop-shadow(0 11px 6px rgba(172, 184, 204, .45))',
+                'custom-drop-shadow': 'drop-shadow(0 11px 6px rgba(172, 184, 204, .45))'
             },
             boxShadow: {
-                'light': '0 0 15px #c7c7c7 inset,0 2px 13px #c7c7c7'
+                light: '0 0 15px #c7c7c7 inset,0 2px 13px #c7c7c7'
             },
             fontFamily: {
-                'fangyuan': ['fangyuan',],
-                'sans': ['fangyuan', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
+                fangyuan: ['fangyuan'],
+                sans: ['fangyuan', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji']
             },
             colors: {
                 white: '#ffffff',
@@ -38,8 +35,12 @@ export default {
                 red: '#ea580c',
                 blue: '#4683ED',
                 background: 'var(--background)',
+
                 music: {
-                    background: 'var(--music-background)',
+                    background: 'var(--music-background)'
+                },
+                audio: {
+                    background: '#d8dde6'
                 },
                 foreground: 'hsl(var(--foreground))',
 
@@ -47,7 +48,7 @@ export default {
                     DEFAULT: 'hsl(var(--primary))',
                     foreground: 'hsl(var(--primary-foreground))',
                     second: 'var(--primary-second)',
-                    hover: "#7db1f8"
+                    hover: '#7db1f8'
                 },
                 secondary: {
                     DEFAULT: 'hsl(var(--secondary))',
@@ -102,5 +103,5 @@ export default {
             }
         }
     },
-    plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+    plugins: [require('tailwindcss-animate')]
+} satisfies Config
