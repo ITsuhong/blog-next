@@ -62,7 +62,7 @@ resources:
         component: fc3-domain
         props:
             region: ${vars.region}
-            domainName: http://suhong.icu
+            domainName: auto
             protocol: HTTP
             routeConfig:
                 routes:
