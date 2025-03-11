@@ -1,8 +1,8 @@
-import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
-import { redirect } from 'next/navigation';
+import { DEFAULT_AUTH_REDIRECT } from '@/routes'
+import { redirect } from 'next/navigation'
 
 const IndexPage = async () => {
-    redirect(DEFAULT_LOGIN_REDIRECT);
-};
+    redirect(DEFAULT_AUTH_REDIRECT)
+}
 
-export default IndexPage;
+export default IndexPage

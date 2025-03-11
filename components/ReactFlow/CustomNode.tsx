@@ -16,17 +16,17 @@ function CustomNode(props) {
                 </div>
             </div>
 
-            <Handle type="target" id="top" position={Position.Top} className="w-36 !bg-teal-500"></Handle>
-            <Handle type="source" id="top" position={Position.Top} className="w-36 !bg-teal-500" />
+            <Handle type="target" id="top-target" position={Position.Top} className="w-36 !bg-teal-500"></Handle>
+            <Handle type="source" id="top-source" position={Position.Top} className="w-36 !bg-teal-500" />
 
-            <Handle type="source" id="bottom" position={Position.Bottom} className="w-16 !bg-teal-500" />
-            <Handle type="target" id="bottom" position={Position.Bottom} className="w-16 !bg-teal-500" />
+            <Handle type="target" id="bottom-target" position={Position.Bottom} className="w-16 !bg-teal-500" />
+            <Handle type="source" id="bottom-source" position={Position.Bottom} className="w-16 !bg-teal-500" />
 
-            <Handle type="target" id="left" position={Position.Left} className="w-16 !bg-teal-500" />
-            <Handle type="source" id="left" position={Position.Left} className="w-16 !bg-teal-500" />
+            <Handle type="target" id="left-target" position={Position.Left} className="w-16 !bg-teal-500" />
+            <Handle type="source" id="left-source" position={Position.Left} className="w-16 !bg-teal-500" />
 
-            <Handle type="source" id="right" position={Position.Right} className="w-16 !bg-teal-500" />
-            <Handle type="target" id="right" position={Position.Right} className="w-16 !bg-teal-500" />
+            <Handle type="target" id="right-target" position={Position.Right} className="w-16 !bg-teal-500" />
+            <Handle type="source" id="right-source" position={Position.Right} className="w-16 !bg-teal-500" />
         </div>
     )
 }

@@ -28,15 +28,18 @@ const AddNodeOnEdgeDrop = () => {
 
     const onConnectEnd = useCallback(
         (event, connectionState) => {
-            const { fromPosition, fromNode } = connectionState
+            console.log(connectionState)
 
+            const { fromPosition, fromNode, fromHandle } = connectionState
+            const { id: positionId } = fromHandle
             // when a connection is dropped on the pane it's not valid
             if (!connectionState.isValid) {
                 // we need to remove the wrapper bounds, in order to get the correct position
                 const id = getId()
                 const { clientX, clientY } = 'changedTouches' in event ? event.changedTouches[0] : event
+                console.log(positionId)
 
-                if (fromPosition == 'top') {
+                if (positionId == 'top-source') {
                     const newNode = {
                         id,
                         type: 'custom',
@@ -48,9 +51,9 @@ const AddNodeOnEdgeDrop = () => {
                         origin: [0.5, 0.0]
                     }
                     setNodes(nds => nds.concat(newNode))
-                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'top', targetHandle: 'bottom' }))
+                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'top-source', targetHandle: 'bottom-target' }))
                 }
-                if (fromPosition == 'bottom') {
+                if (positionId == 'bottom-source') {
                     console.log('事这里')
                     const newNode = {
                         id,
@@ -63,9 +66,9 @@ const AddNodeOnEdgeDrop = () => {
                         origin: [0.5, 0.0]
                     }
                     setNodes(nds => nds.concat(newNode))
-                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'bottom', targetHandle: 'top' }))
+                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'bottom-source', targetHandle: 'top-target' }))
                 }
-                if (fromPosition == 'left') {
+                if (positionId == 'left-source') {
                     console.log('事这里')
                     const newNode = {
                         id,
@@ -78,9 +81,9 @@ const AddNodeOnEdgeDrop = () => {
                         origin: [0.5, 0.0]
                     }
                     setNodes(nds => nds.concat(newNode))
-                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'left', targetHandle: 'right' }))
+                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'left-source', targetHandle: 'right-target' }))
                 }
-                if (fromPosition == 'right') {
+                if (positionId == 'right-source') {
                     console.log('事这里')
                     const newNode = {
                         id,
@@ -93,7 +96,7 @@ const AddNodeOnEdgeDrop = () => {
                         origin: [0.5, 0.0]
                     }
                     setNodes(nds => nds.concat(newNode))
-                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'right', targetHandle: 'left' }))
+                    setEdges(eds => eds.concat({ id: id, source: connectionState.fromNode.id, target: id, sourceHandle: 'right-source', targetHandle: 'left-target' }))
                 }
             }
         },

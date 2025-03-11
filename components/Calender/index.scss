@@ -1,0 +1,40 @@
+.calendar {
+    width: 100%;
+
+    //height: 200px;
+    //background: blue;
+}
+.calendar-month {
+    &-week-list {
+        display: flex;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #ccc;
+
+        &-item {
+            padding: 20px 16px;
+            text-align: left;
+            color: #7d7d7f;
+
+            flex: 1;
+        }
+    }
+    &-body {
+        &-row {
+            height: 100px;
+            display: flex;
+        }
+        &-cell {
+            flex: 1;
+            border: 1px solid #eee;
+            padding: 10px;
+            // color: #ccc;
+
+            &-current {
+                font-weight: 700;
+                // color: white;
+            }
+        }
+    }
+}

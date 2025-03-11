@@ -14,8 +14,7 @@ function getRandomLightColor() {
 }
 
 export default async function LeftNavigation() {
-    // const list = await getTags()
-    const list = []
+    const list = await getTags()
     const componentsList = [
         {
             name: '拖拽TodoList',
@@ -30,12 +29,27 @@ export default async function LeftNavigation() {
         {
             name: 'ReactFlow 画流程图',
             path: '/public/flow/',
-            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/reactflow.png'
         },
         {
             name: 'ReactFlow 振荡器调音',
             path: '/public/audio/',
-            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/vscode.png'
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/audioflow.png'
+        },
+        {
+            name: '上传文件',
+            path: '/public/upload/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/upload.png'
+        },
+        {
+            name: 'Form表单',
+            path: '/public/form/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/form.png'
+        },
+        {
+            name: '日历 Calender',
+            path: '/public/calender/',
+            image: 'https://img-saas-su.oss-cn-beijing.aliyuncs.com/blog/calener.png'
         },
         {
             name: '高仿 ElementPlus',
